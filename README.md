@@ -11,7 +11,15 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu ambiente de dese
 - Java 17+
 - PostgreSQL (via Docker)
 
+## Clone o repositório
+
+   Primeiro, clone o repositório para sua máquina:
+
+```bash
+git clone https://github.com/PedroBittencourtCosta/crud-basico.git
+```
 ## Configuração do Ambiente
+
 
 Para garantir que sua aplicação funcione corretamente, você precisa criar um arquivo `.env` na raiz do projeto. Esse arquivo conterá as variáveis de ambiente necessárias para a conexão com o banco de dados PostgreSQL. Siga os passos abaixo:
 
@@ -27,15 +35,6 @@ JDBCURL=jdbc:postgresql://localhost:5432/crud-basico
 
 Essas variáveis de ambiente serão utilizadas pela sua aplicação para se conectar ao banco de dados.
 
-## Docker compose
-
-Para criar o banco de dados PostgreSQL utilizando Docker, execute o seguinte comando no terminal na raiz do projeto:
-
-```bash
-docker compose up -d
-```
-Este comando criará e iniciará o contêiner do PostgreSQL, permitindo que o banco de dados seja acessado e manipulado pelo projeto.
-
 ## Configuração do Maven
 
 No arquivo pom.xml, estou utilizando a seguinte dependência para conectar seu projeto Java ao banco de dados PostgreSQL:
@@ -49,6 +48,23 @@ No arquivo pom.xml, estou utilizando a seguinte dependência para conectar seu p
 ```
 
 Caso deseje utilizar outro banco de dados, basta substituir a dependência acima pela dependência específica do banco que você preferir e garantir que o banco esteja configurado em sua máquina ou rodando em um contêiner Docker. Certifique-se de ajustar também as configurações de conexão no arquivo de propriedades da aplicação.
+
+## Docker compose
+
+Para criar o banco de dados PostgreSQL utilizando Docker, execute o seguinte comando no terminal na raiz do projeto:
+
+```bash
+  docker compose up -d
+```
+Este comando criará e iniciará o contêiner do PostgreSQL, permitindo que o banco de dados seja acessado e manipulado pelo projeto.
+
+## Instale as dependências do Maven
+
+Execute o seguinte comando para baixar as dependências do projeto:
+
+```bash
+  mvn install
+```
 
 [//]: # (## Funcionalidades do Projeto)
 
