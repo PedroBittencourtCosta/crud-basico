@@ -10,10 +10,26 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu ambiente de dese
 - Maven
 - Java 17+
 - PostgreSQL (via Docker)
-- 
-## Configuração do Docker
 
-Para configurar o banco de dados PostgreSQL utilizando Docker, execute o seguinte comando no terminal na raiz do projeto:
+## Configuração do Ambiente
+
+Para garantir que sua aplicação funcione corretamente, você precisa criar um arquivo `.env` na raiz do projeto. Esse arquivo conterá as variáveis de ambiente necessárias para a conexão com o banco de dados PostgreSQL. Siga os passos abaixo:
+
+1. Na raiz do seu projeto, crie um arquivo chamado `.env`.
+2. Cole o seguinte conteúdo no arquivo:
+
+```env
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+POSTGRES_DB=crud-basico
+JDBCURL=jdbc:postgresql://localhost:5432/crud-basico
+```
+
+Essas variáveis de ambiente serão utilizadas pela sua aplicação para se conectar ao banco de dados.
+
+## Docker compose
+
+Para criar o banco de dados PostgreSQL utilizando Docker, execute o seguinte comando no terminal na raiz do projeto:
 
 ```bash
 docker compose up -d
@@ -22,7 +38,7 @@ Este comando criará e iniciará o contêiner do PostgreSQL, permitindo que o ba
 
 ## Configuração do Maven
 
-No arquivo pom.xml, adicione a seguinte dependência para conectar seu projeto Java ao banco de dados PostgreSQL:
+No arquivo pom.xml, estou utilizando a seguinte dependência para conectar seu projeto Java ao banco de dados PostgreSQL:
 
 ```xml
     <dependency>
@@ -32,14 +48,20 @@ No arquivo pom.xml, adicione a seguinte dependência para conectar seu projeto J
     </dependency>
 ```
 
-Essa dependência é essencial para que sua aplicação Java possa se comunicar com o banco de dados PostgreSQL.
+Caso deseje utilizar outro banco de dados, basta substituir a dependência acima pela dependência específica do banco que você preferir e garantir que o banco esteja configurado em sua máquina ou rodando em um contêiner Docker. Certifique-se de ajustar também as configurações de conexão no arquivo de propriedades da aplicação.
 
-## Funcionalidades do Projeto
-O projeto oferece as seguintes operações básicas:
+[//]: # (## Funcionalidades do Projeto)
 
-- Criar: Inserir novos registros no banco de dados.
-- Buscar: Consultar registros existentes.
-- Alterar: Atualizar informações de registros.
-- Deletar: Remover registros do banco de dados.
+[//]: # (O projeto oferece as seguintes operações básicas:)
 
-Em breve, uma interface gráfica será implementada utilizando Java Swing, o que facilitará a interação com o sistema de CRUD.
+[//]: # ()
+[//]: # (- Criar: Inserir novos registros no banco de dados.)
+
+[//]: # (- Buscar: Consultar registros existentes.)
+
+[//]: # (- Alterar: Atualizar informações de registros.)
+
+[//]: # (- Deletar: Remover registros do banco de dados.)
+
+[//]: # ()
+[//]: # (Em breve, uma interface gráfica será implementada utilizando Java Swing, o que facilitará a interação com o sistema de CRUD.)
