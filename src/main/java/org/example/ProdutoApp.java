@@ -6,7 +6,7 @@ import org.example.model.Produto;
 import java.util.Scanner;
 
 public class ProdutoApp {
-    private static ProdutoDAO produtoDAO = new ProdutoDAO();
+    private static final ProdutoDAO produtoDAO = new ProdutoDAO();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
