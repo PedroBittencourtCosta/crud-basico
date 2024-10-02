@@ -1,8 +1,6 @@
 package org.example;
 
-import org.example.daos.ProdutoDAO;
 import org.example.daos.UsuarioDAO;
-import org.example.model.Produto;
 import org.example.model.Usuario;
 
 import java.util.Scanner;

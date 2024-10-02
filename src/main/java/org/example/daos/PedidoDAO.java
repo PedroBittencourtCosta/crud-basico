@@ -8,8 +8,13 @@ import java.sql.*;
 
 public class PedidoDAO implements GenericDAO<Pedido>{
 
+    private final ConectionDB conectionDB;
+
     public PedidoDAO() {
-        try (Connection conn = ConectionDB.getConnection()) {
+
+        conectionDB = new ConectionDB();
+
+        try (Connection conn = conectionDB.getConnection()) {
             String sqlCreateTable = """
                     create table pedido(
                             id serial primary key,
@@ -32,7 +37,7 @@ public class PedidoDAO implements GenericDAO<Pedido>{
     public void create(Pedido pedido) {
 
         String sqlInsert = "INSERT INTO pedido(numero, id_usuario, total) VALUES(?, ?, ?)";
-        try (Connection conn = ConectionDB.getConnection();
+        try (Connection conn = conectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
 
             checksExistUsuario(pedido.getIdUsuario());
@@ -51,7 +56,7 @@ public class PedidoDAO implements GenericDAO<Pedido>{
     @Override
     public Pedido get(int id) {
         String sqlSelect = "SELECT * FROM pedido WHERE id = ?";
-        try (Connection conn = ConectionDB.getConnection();
+        try (Connection conn = conectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlSelect)) {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();

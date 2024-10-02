@@ -1,14 +1,25 @@
 package org.example.db;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.*;
 
 public class ConectionDB {
 
-    private static final String jdbcUrl = "jdbc:postgresql://localhost:5432/crud-basico";
-    private static final String username = "postgres";
-    private static final String password = "password";
+    private final String jdbcUrl;
+    private final String username;
+    private final String password;
 
-    public static Connection getConnection() throws SQLException {
+    public ConectionDB(){
+
+        Dotenv dotenv = Dotenv.load();
+
+         jdbcUrl = dotenv.get("JDBCURL");
+         username = dotenv.get("POSTGRES_USER");
+         password = dotenv.get("POSTGRES_PASSWORD");
+    }
+
+    public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(jdbcUrl, username, password);
     }
 }

@@ -7,8 +7,13 @@ import java.sql.*;
 
 public class UsuarioDAO implements GenericDAO<Usuario>{
 
+    private final ConectionDB conectionDB;
+
     public UsuarioDAO() {
-        try (Connection conn = ConectionDB.getConnection()) {
+
+        conectionDB = new ConectionDB();
+
+        try (Connection conn = conectionDB.getConnection()) {
             String sqlCreateTable = """
                     create table IF NOT EXISTS usuario(
                         id serial primary key,
@@ -28,7 +33,7 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
     @Override
     public void create(Usuario user) {
         String sqlInsert = "INSERT INTO usuario(nome, email, endereco, telefone, profissao) VALUES(?, ?, ?, ?, ?)";
-        try (Connection conn = ConectionDB.getConnection();
+        try (Connection conn = conectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
 
             pstmt.setString(1, user.getNome());
@@ -47,7 +52,7 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
     @Override
     public Usuario get(int id) {
         String sqlSelect = "SELECT * FROM usuario WHERE id = ?";
-        try (Connection conn = ConectionDB.getConnection();
+        try (Connection conn = conectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlSelect)) {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
