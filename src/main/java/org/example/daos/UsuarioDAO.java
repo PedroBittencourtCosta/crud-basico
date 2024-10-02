@@ -3,9 +3,7 @@ package org.example.daos;
 import org.example.db.ConectionDB;
 import org.example.model.Usuario;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class UsuarioDAO implements GenericDAO<Usuario>{
 
@@ -28,12 +26,46 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
     }
 
     @Override
-    public void create(Usuario obj) {
+    public void create(Usuario user) {
+        String sqlInsert = "INSERT INTO usuario(nome, email, endereco, telefone, profissao) VALUES(?, ?, ?, ?, ?)";
+        try (Connection conn = ConectionDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
 
+            pstmt.setString(1, user.getNome());
+            pstmt.setString(2, user.getEmail());
+            pstmt.setString(3, user.getEndereco());
+            pstmt.setString(4, user.getTelefone());
+            pstmt.setString(5, user.getProfissao());
+
+            pstmt.executeUpdate();
+            System.out.println("Usuario cadastrado com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Erro ao cadastrar usuario: " + e.getMessage());
+        }
     }
 
     @Override
     public Usuario get(int id) {
+        String sqlSelect = "SELECT * FROM usuario WHERE id = ?";
+        try (Connection conn = ConectionDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlSelect)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getDate("dtinsercao"),
+                        rs.getString("endereco"),
+                        rs.getString("telefone"),
+                        rs.getString("profissao")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar o usuario: " + e.getMessage());
+        }
         return null;
     }
 

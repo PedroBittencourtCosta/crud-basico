@@ -22,10 +22,9 @@ public class Usuario {
         this.profissao = profissao;
     }
 
-    public Usuario(String nome, String email, Date dtinsercao, String endereco, String telefone, String profissao) {
+    public Usuario(String nome, String email, String endereco, String telefone, String profissao) {
         this.nome = nome;
         this.email = email;
-        this.dtinsercao = dtinsercao;
         this.endereco = endereco;
         this.telefone = telefone;
         this.profissao = profissao;
@@ -85,5 +84,18 @@ public class Usuario {
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", dtinsercao=" + dtinsercao +
+                ", endereco='" + endereco + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", profissao='" + profissao + '\'' +
+                '}';
     }
 }
