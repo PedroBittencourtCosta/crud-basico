@@ -20,11 +20,10 @@ public class Pedido {
         this.status = status;
     }
 
-    public Pedido(int numero, int idUsuario, Date dtinsercao, double total, boolean status) {
+    public Pedido(int numero, int idUsuario, double total) {
         this.numero = numero;
         this.idUsuario = idUsuario;
         this.total = total;
-        this.status = status;
     }
 
     public int getId() {
@@ -67,7 +66,7 @@ public class Pedido {
         this.total = total;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
