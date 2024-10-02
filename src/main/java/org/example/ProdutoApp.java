@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.dao.ProdutoDAO;
+import org.example.daos.ProdutoDAO;
 import org.example.model.Produto;
 
 import java.util.Scanner;
@@ -52,7 +52,7 @@ public class ProdutoApp {
         scanner.nextLine(); // Consumir a quebra de linha
 
         Produto produto = new Produto(nome, preco);
-        produtoDAO.cadastrarProduto(produto);
+        produtoDAO.create(produto);
     }
 
     private static void consultarProduto(Scanner scanner) {
@@ -60,7 +60,7 @@ public class ProdutoApp {
         int id = scanner.nextInt();
         scanner.nextLine(); // Consumir a quebra de linha
 
-        Produto produto = produtoDAO.consultarProduto(id);
+        Produto produto = produtoDAO.get(id);
         if (produto != null) {
             System.out.println("Produto encontrado: " + produto);
         } else {

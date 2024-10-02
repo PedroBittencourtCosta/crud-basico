@@ -1,11 +1,11 @@
-package org.example.dao;
+package org.example.daos;
 
 import org.example.db.ConectionDB;
 import org.example.model.Produto;
 
 import java.sql.*;
 
-public class ProdutoDAO {
+public class ProdutoDAO implements GenericDAO<Produto>{
 
     public ProdutoDAO() {
         try (Connection conn = ConectionDB.getConnection()) {
@@ -21,7 +21,8 @@ public class ProdutoDAO {
         }
     }
 
-    public void cadastrarProduto(Produto produto) {
+    @Override
+    public void create(Produto produto) {
         String sqlInsert = "INSERT INTO produto(nome, preco) VALUES(?, ?)";
         try (Connection conn = ConectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
@@ -34,7 +35,8 @@ public class ProdutoDAO {
         }
     }
 
-    public Produto consultarProduto(int id) {
+    @Override
+    public Produto get(int id) {
         String sqlSelect = "SELECT * FROM produto WHERE id = ?";
         try (Connection conn = ConectionDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlSelect)) {
@@ -48,5 +50,15 @@ public class ProdutoDAO {
             System.out.println("Erro ao consultar produto: " + e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public void update(int id, Produto obj) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
     }
 }
